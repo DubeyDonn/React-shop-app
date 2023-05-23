@@ -1,0 +1,16 @@
+.cart {
+  position: relative;
+}
+
+.carticon {
+  width: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.cartnumber {
+  position: absolute;
+  top: -10px;
+  left: 18px;
+  z-index: 2;
+}

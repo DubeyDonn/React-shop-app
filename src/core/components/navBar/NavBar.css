@@ -1,0 +1,54 @@
+.navbar {
+    background-color: #f8f9fa;
+    padding: 10px;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .navbar-toggler {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .navbar-toggler-icon {
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    display: block;
+  }
+  
+  .navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .navbar-nav {
+    list-style: none;
+    display: flex;
+  }
+  
+  .nav-item {
+    margin-left: 10px;
+  }
+  
+  .nav-link {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .nav-link.active {
+    font-weight: bold;
+  }
+  
