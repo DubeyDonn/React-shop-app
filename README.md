@@ -1,3 +1,4 @@
+
 # React-shop-app
 To run the Shop App on your local machine, you need to install the project dependencies. Follow the steps below:
 
@@ -21,3 +22,4 @@ To run the Shop App on your local machine, you need to install the project depen
    ```bash
    npm start
     ```
+
