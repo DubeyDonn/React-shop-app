@@ -1,54 +1,77 @@
 .navbar {
-    background-color: #f8f9fa;
-    padding: 10px;
-  }
-  
+  background-color: #f8f9fa;
+  padding: 10px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+.navbar-toggler {
+  display: none; /* Hide the toggler on desktop */
+}
+
+.navbar-toggler-icon {
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+  display: block;
+}
+
+.navbar-collapse {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar-nav {
+  list-style: none;
+  display: flex;
+}
+
+.nav-item {
+  margin-left: 10px;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+}
+
+.nav-link.active {
+  font-weight: bold;
+}
+@media screen and (max-width: 768px) {
   .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
   }
-  
-  .navbar-brand {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
-  }
-  
+
   .navbar-toggler {
-    background: none;
-    border: none;
-    cursor: pointer;
+    display: block; /* Show the toggler on mobile */
+    position: relative;
+    top: 10px;
+    float: right;
   }
-  
-  .navbar-toggler-icon {
-    width: 20px;
-    height: 20px;
-    background-color: #333;
-    display: block;
-  }
-  
+
   .navbar-collapse {
-    display: flex;
-    justify-content: flex-end;
+    display: none; /* Hide the navbar items by default on mobile */
   }
-  
-  .navbar-nav {
-    list-style: none;
-    display: flex;
+
+  .navbar-collapse.open {
+    display: flex; /* Show the navbar items when toggled open */
+    flex-direction: column;
+    align-items: flex-end;
   }
-  
+
   .nav-item {
-    margin-left: 10px;
+    margin: 10px 0;
   }
-  
-  .nav-link {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .nav-link.active {
-    font-weight: bold;
-  }
-  
+}
