@@ -22,6 +22,7 @@ const ViewProduct = () => {
         const response = await axios.get(
           `https://my-shop-app-react-default-rtdb.firebaseio.com/products/${productId}.json`
         );
+
         setProduct(response.data);
         setLoading(false);
       } catch (error) {
@@ -29,75 +30,63 @@ const ViewProduct = () => {
         setLoading(false);
       }
     };
-
-    fetchProduct();
-  }, [productId]);
-
-  useEffect(() => {
     const fetchCart = async () => {
       try {
         const response = await axios.get(
           `https://my-shop-app-react-default-rtdb.firebaseio.com/cart.json`
         );
-        if (response.data) {
-          setCart(response.data);
-        }
+        setCart(response.data);
+        response.data.map((item) => {
+          if (item.productId === productId) {
+            setProductQuantityInCart(item.quantity);
+          }
+        });
       } catch (error) {
-        console.error("Error fetching cart:", error);
+        console.error("Error fetching cart.", error);
       }
     };
 
+    fetchProduct();
     fetchCart();
-  }, [productId, cart]);
-
-  useEffect(() => {
-    const productInCart = cart.find((item) => item.productId === productId);
-    if (productInCart) {
-      setProductQuantityInCart(productInCart.quantity);
-    } else {
-      setProductQuantityInCart(0);
-    }
-  }, [cart, productId]);
+  }, []);
 
   const handleAddToCart = () => {
-    if (product) {
-      const existingCartItem = cart.find(
-        (item) => item.productId === productId
-      );
+    const existingCartItem = cart.find((item) => item.productId === productId);
 
-      if (existingCartItem) {
-        existingCartItem.quantity += 1;
-        existingCartItem.totalPrice =
-          existingCartItem.price * existingCartItem.quantity;
-      } else {
-        const newCartItem = {
-          productId: productId,
-          title: product.title,
-          price: product.price,
-          quantity: 1,
-          totalPrice: product.price,
-        };
-        cart.push(newCartItem);
-      }
-
-      axios
-        .put(
-          "https://my-shop-app-react-default-rtdb.firebaseio.com/cart.json",
-          cart
-        )
-        .then((response) => {
-          console.log("Product added to cart successfully");
-          const productInCart = cart.find(
-            (item) => item.productId === productId
-          );
-          if (productInCart) {
-            setProductQuantityInCart(productInCart.quantity);
-          }
-        })
-        .catch((error) => {
-          console.error("Error adding product to cart:", error);
-        });
+    if (existingCartItem) {
+      console.log("executed1");
+      existingCartItem.quantity += 1;
+      existingCartItem.totalPrice =
+        existingCartItem.price * existingCartItem.quantity;
+      console.log("cart_in", cart);
+    } else {
+      console.log("executed2");
+      const newCartItem = {
+        productId: productId,
+        title: product.title,
+        price: product.price,
+        quantity: 1,
+        totalPrice: product.price,
+      };
+      cart.push(newCartItem);
     }
+
+    axios
+      .put(
+        "https://my-shop-app-react-default-rtdb.firebaseio.com/cart.json",
+        cart
+      )
+      .then((res) => {
+        res.data.map((item) => {
+          if (item.productId === productId) {
+            setProductQuantityInCart(item.quantity);
+          }
+        });
+        console.log("Product added to cart successfully");
+      })
+      .catch((error) => {
+        console.error("Error adding product to cart:", error);
+      });
   };
 
   const { title, price, description, imageUrl } = product || {};

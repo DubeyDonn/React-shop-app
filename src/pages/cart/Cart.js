@@ -16,6 +16,7 @@ const Cart = () => {
         );
         if (response.data) {
           setCartItems(response.data);
+          console.log(response.data);
         }
         setLoading(false);
       } catch (error) {
